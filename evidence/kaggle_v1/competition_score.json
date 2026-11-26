@@ -1,0 +1,21 @@
+{
+  "ref": 57940904,
+  "competition": "lish-moa",
+  "notebook": "xiaozhanfen/moa-response-library",
+  "version": 1,
+  "submitted_utc": "2026-11-03 08:43:27.697000",
+  "checked_utc": "2026-11-03T09:17:44.312006+00:00",
+  "status": "COMPLETE",
+  "public": 0.01814,
+  "private": 0.0159,
+  "error": null,
+  "description": "CS4486 Response Library v1 verified 913bc687e6ed",
+  "gaps_vs_fifth": {
+    "public": 9e-05,
+    "private": -0.00012
+  },
+  "improvement_vs_course5": {
+    "public": 0.00052,
+    "private": 0.00039
+  }
+}

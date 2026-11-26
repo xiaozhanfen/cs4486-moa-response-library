@@ -1,0 +1,22 @@
+{
+  "protocol": "Fixed OOF sources, fusion refitted on other four folds for each scored fold",
+  "rows": 21948,
+  "library_only": "Original uncalibrated OOF library votes",
+  "scores": {
+    "library": 0.020215833365795462,
+    "response_cnn5": 0.016943661834590684,
+    "response_cnn5+library": 0.01683896607611202,
+    "response_profile5": 0.01704104913933928,
+    "response_profile5+library": 0.016911139582835244,
+    "response_aux5": 0.01693917621563031,
+    "response_aux5+library": 0.01681519358961418,
+    "response_cnn5+response_profile5": 0.016831354352855137,
+    "response_cnn5+response_profile5+library": 0.01676334486066307,
+    "response_cnn5+response_aux5": 0.01685988115095567,
+    "response_cnn5+response_aux5+library": 0.01677042048084246,
+    "response_profile5+response_aux5": 0.01681192958348318,
+    "response_profile5+response_aux5+library": 0.016738371143784358,
+    "response_cnn5+response_profile5+response_aux5": 0.01678997055372187,
+    "response_cnn5+response_profile5+response_aux5+library": 0.0167250661566347
+  }
+}

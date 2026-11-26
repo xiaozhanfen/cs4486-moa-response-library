@@ -1,0 +1,252 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{tabularx}
+\usepackage{booktabs} % For better looking tables
+
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+
+% NOTE: Mini Project report template for the undergraduate CS4486 AI course.
+% The Mini Project is a Kaggle competition reproduction & improvement task.
+% If the course releases an official template, please replace this file.
+
+\begin{document}
+
+% --------------------------------------------------------------------------
+% TITLE & AUTHOR
+% --------------------------------------------------------------------------
+\title{CS4486 AI Course -- Mini Project Final Report: [Kaggle Competition Name]}
+
+\author{
+    \IEEEauthorblockN{
+        \textbf{Team Name:} [Your Team Name, e.g., Panda]
+    }
+
+    \vspace{1em}
+    
+    \IEEEauthorblockN{
+        % List authors with Student ID (NOT EID). Group size: 2-3 students.
+        Name of Group Leader \and + Student ID \\
+        Name of Group Member A \and + Student ID \\ 
+        Name of Group Member B \and + Student ID
+    }
+}
+
+% The paper headers
+\markboth{CS4486 AI Course - Mini Project Final Report}%
+{Team [Team Name]: [Kaggle Competition Name]}
+
+\maketitle
+
+% --------------------------------------------------------------------------
+% ABSTRACT
+% --------------------------------------------------------------------------
+\begin{abstract}
+[Instructions: Write a brief abstract (approx. 150 words). Summarize the selected Kaggle competition and its official evaluation metric, how your project solves the task, and the final evaluation results (leaderboard rank or cross-validation score). This should be a standalone summary of your entire project. \\ \textbf{IMPORTANT: Place the code repository link at the end of the Abstract.}]
+\end{abstract}
+
+\begin{IEEEkeywords}
+[List 4-5 keywords related to your project, e.g., Kaggle Competition, Deep Learning, Computer Vision, Regression, Model Ensemble.]
+\end{IEEEkeywords}
+
+% --------------------------------------------------------------------------
+% SECTION 1: TASK DESCRIPTION & METRIC
+% --------------------------------------------------------------------------
+\section{Task Description \& Metric}
+\label{sec:task}
+\textbf{Instructions:} (Approx. 1 page)
+Briefly introduce the competition background and motivation, and state which competition (and difficulty tier) your group chose, with the competition link. Describe the modeling formulation (e.g., classification, regression, multi-label, multi-output, time-series), and clearly explain the official evaluation metric and its meaning.
+
+[Enter text here...]
+
+% --------------------------------------------------------------------------
+% SECTION 2: DATA ANALYSIS & CHALLENGES
+% --------------------------------------------------------------------------
+\section{Data Analysis \& Challenges}
+\label{sec:data}
+\textbf{Instructions:} (Approx. 1-2 pages)
+Describe the dataset size, feature types, and basic distributions, and analyze key challenges such as missing values, noise, imbalance, high-dimensionality, long-text modeling, or other inherent difficulties specific to your competition.
+
+[Enter text here...]
+
+% --------------------------------------------------------------------------
+% SECTION 3: VALIDATION STRATEGY
+% --------------------------------------------------------------------------
+\section{Validation Strategy}
+\label{sec:validation}
+\textbf{Instructions:} (Approx. 1 page)
+Explain the validation approach used (Kaggle leaderboard or cross-validation), justify its suitability for the task, and detail specific measures taken to prevent data leakage.
+
+\subsection{Cross-Validation Setup (Case B: No Late Submission)}
+If direct scoring via Kaggle is not possible, clearly specify:
+\begin{itemize}
+    \item Exact CV setup: number of folds, shuffling, random seeds
+    \item How evaluation metrics are computed (aligned with the competition metric)
+    \item How results can be reproduced (fixed seeds, environment description)
+\end{itemize}
+
+[Enter text here...]
+
+% --------------------------------------------------------------------------
+% SECTION 4: BASELINE MODEL
+% --------------------------------------------------------------------------
+\section{Baseline Model}
+\label{sec:baseline}
+\textbf{Instructions:} (Approx. 1 page)
+Present a simple, reproducible baseline model, including basic modeling ideas and training settings, along with its validation or leaderboard score.
+
+[Enter text here...]
+
+% --------------------------------------------------------------------------
+% SECTION 5: MODEL IMPROVEMENTS
+% --------------------------------------------------------------------------
+\section{Model Improvements}
+\label{sec:improvements}
+\textbf{Instructions:} (Approx. 2-3 pages)
+Systematically describe major improvements over the baseline (e.g., model architecture, feature engineering, training strategies), and demonstrate their effectiveness via comparative or ablation studies.
+
+\subsection{Pretrained Model Usage}
+\textbf{Instructions:} If a pretrained model is used, specify:
+\begin{itemize}
+    \item Model source (checkpoint / paper / official link)
+    \item Parameter count (official value or estimation method; must be below 0.5B unless the competition explicitly allows or requires pretrained models)
+    \item Whether model ensembling is used
+\end{itemize}
+If no pretrained model is used, clearly describe the model architecture, its design motivation, and improvements over the baseline. If you referenced public ideas, papers, or discussion threads, cite them here and in the References.
+
+[Enter text here...]
+
+% --------------------------------------------------------------------------
+% SECTION 6: FINAL RESULTS
+% --------------------------------------------------------------------------
+\section{Final Results}
+\label{sec:results}
+\textbf{Instructions:} (Approx. 1 page)
+Summarize the final model's performance on the Kaggle leaderboard or via cross-validation, and analyze how it compares to the ``Top-5-level'' target.
+
+\begin{table*}[h]
+\caption{Performance Comparison (Example Table)}
+\label{tab:results}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{0.9\textwidth}{lXXX}
+\toprule
+\textbf{Model} & \textbf{Validation Score} & \textbf{Leaderboard Score} & \textbf{Rank} \\
+\midrule
+Baseline & [score] & [score] & [rank] \\
+Improved Model 1 & [score] & [score] & [rank] \\
+Final Model & [score] & [score] & [rank] \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+[Enter text here...]
+
+% --------------------------------------------------------------------------
+% SECTION 7: AI TOOL USAGE STATEMENT
+% --------------------------------------------------------------------------
+\section{AI Tool Usage Statement}
+\label{sec:ai}
+\textbf{Instructions:} (Approx. 0.5-1 page)
+Clearly state whether and how AI tools were used (e.g., for debugging, idea discussion, querying APIs, or writing assistance), and specify which core designs and implementations were independently completed by the group.
+
+[Enter text here...]
+
+% --------------------------------------------------------------------------
+% SECTION 8: DISCUSSION & REFLECTION
+% --------------------------------------------------------------------------
+\section{Discussion \& Reflection}
+\label{sec:discussion}
+\textbf{Instructions:} (Approx. 1 page)
+Reflect on which methods and attempts proved effective, which experiments failed to meet expectations, and discuss current limitations and possible future improvements.
+
+[Enter text here...]
+
+% --------------------------------------------------------------------------
+% SECTION 9: REPRODUCIBILITY
+% --------------------------------------------------------------------------
+\section{Reproducibility}
+\label{sec:reproducibility}
+\textbf{Instructions:} (Approx. 0.5-1 page)
+Provide key information required for reproducibility, including random seed settings, runtime environment details (OS, Python version, deep learning framework, CUDA/GPU), and access to complete code and notebooks (link).
+
+[Enter text here...]
+
+% --------------------------------------------------------------------------
+% SECTION 10: STUDENT BIO & REFLECTION
+% --------------------------------------------------------------------------
+\section{Student Bio and Self-Reflection}
+\label{sec:bio}
+\textbf{Instructions:}
+Present a bio of \textbf{each} student (background, technical ideas, interests). Give a self-reflection on the work done by you. State and justify your contribution to the Mini Project.
+
+\subsection{Bio: [Student A Name]}
+\textbf{Biography:} [Enter bio...] \\
+\textbf{Self-Reflection:} [Enter reflection...] \\
+\textbf{Contribution Justification:} [Explain your specific role and heavy lifting...]
+
+\subsection{Bio: [Student B Name]}
+\textbf{Biography:} [Enter bio...] \\
+\textbf{Self-Reflection:} [Enter reflection...] \\
+\textbf{Contribution Justification:} [Explain your specific role and heavy lifting...]
+
+\subsection{Bio: [Student C Name]}
+\textbf{Biography:} [Enter bio...] \\
+\textbf{Self-Reflection:} [Enter reflection...] \\
+\textbf{Contribution Justification:} [Explain your specific role and heavy lifting...]
+
+% --------------------------------------------------------------------------
+% SECTION 11: RELATIVE CONTRIBUTION
+% --------------------------------------------------------------------------
+\section{Relative Contribution}
+\label{sec:contribution}
+
+\textbf{Instructions:} Present the relative contribution of each group member.
+Please use \textbf{Actual Productive Hours} to measure contribution.
+
+\begin{table*}[h]
+\caption{Team Contribution Breakdown (in Hours)}
+\label{tab:contributions}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{0.9\textwidth}{|l|X|X|X|X|X|c|}
+\hline
+\textbf{Team Member} & \textbf{Data Analysis \& Validation} & \textbf{Baseline} & \textbf{Model Improvement} & \textbf{Final Experiments \& Tuning} & \textbf{Report \& Presentation} & \textbf{Total} \\
+\hline
+[Student A Name] & [e.g. 6] & [e.g. 5] & [e.g. 10] & [e.g. 8] & [e.g. 6] & \textbf{35} \\
+\hline
+[Student B Name] & [e.g. 6] & [e.g. 5] & [e.g. 10] & [e.g. 8] & [e.g. 6] & \textbf{35} \\
+\hline
+[Student C Name] & ... & ... & ... & ... & ... & ... \\
+\hline
+\textbf{Team Total} & \textbf{...} & \textbf{...} & \textbf{...} & \textbf{...} & \textbf{...} & \textbf{...} \\
+\hline
+\end{tabularx}
+\end{table*}
+
+\section*{Team Leader Attestation}
+``I, [Team Leader's Name], confirm that the contributions listed above accurately reflect the work completed by each team member.'' \\
+\vspace{0.5cm}
+Signed: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+% --------------------------------------------------------------------------
+% REFERENCES
+% --------------------------------------------------------------------------
+\begin{thebibliography}{1}
+\bibliographystyle{IEEEtran}
+
+\bibitem{ref1}
+[Example Reference... replace this with your citations. Include the Kaggle competition page, public notebooks, papers, and discussion threads you referenced.]
+
+\end{thebibliography}
+
+\end{document}

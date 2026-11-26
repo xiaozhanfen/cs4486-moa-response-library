@@ -1,0 +1,21 @@
+__pycache__/
+.work/
+outputs/
+reproduction/
+release_rebuilt/
+*.building/
+data/raw/
+models/
+*.log
+kaggle.json
+access_token
+.env
+
+# Rebuildable training arrays and local compiler outputs
+runs/**
+!runs/**/
+!runs/**/*.json
+*.aux
+*.xdv
+*.synctex.gz
+.venv/

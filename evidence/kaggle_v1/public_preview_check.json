@@ -1,0 +1,8 @@
+{
+  "rows": 3982,
+  "targets": 206,
+  "controls": 358,
+  "max_abs_error_vs_local": 1.214331570298377e-07,
+  "mean_abs_error_vs_local": 2.1015446320636548e-10,
+  "downloaded_csv_sha256": "913bc687e6edd63d8bdaec11d9e842f5a5d41be2c7fd554676d4d07ad2ed7bb5"
+}

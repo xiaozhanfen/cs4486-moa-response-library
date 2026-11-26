@@ -1,0 +1,39 @@
+{
+  "validation_fold": 0,
+  "validation_rows": 4390,
+  "tags": [
+    "response_cnn5",
+    "response_profile5",
+    "response_aux5"
+  ],
+  "seeds": [
+    13,
+    23,
+    37
+  ],
+  "omitted_extra_fold_per_smaller_seed": [
+    1,
+    2,
+    3
+  ],
+  "scores": {
+    "larger": {
+      "combined": 0.01696857033553107,
+      "response_cnn5": 0.017291367414621145,
+      "response_profile5": 0.017382397510282938,
+      "response_aux5": 0.017264970739891364
+    },
+    "smaller": {
+      "combined": 0.017132019610137224,
+      "response_cnn5": 0.01768207846680933,
+      "response_profile5": 0.017626633555657148,
+      "response_aux5": 0.017387504946305785
+    }
+  },
+  "larger_training_set_improved": true,
+  "epochs": {
+    "response_cnn5": 18,
+    "response_profile5": 8,
+    "response_aux5": 22
+  }
+}

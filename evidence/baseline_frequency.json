@@ -1,0 +1,8 @@
+{
+  "method": "training-fold label frequency; controls zero",
+  "folds": 5,
+  "treated": 0.02287174299671146,
+  "all_rows": 0.02107957568202835,
+  "treated_rows": 21948,
+  "total_rows": 23814
+}

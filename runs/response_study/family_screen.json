@@ -1,0 +1,73 @@
+{
+  "base+aux+profile+plain": {
+    "treated": 0.016769680804884765,
+    "fit": {
+      "coefficients": [
+        0.039693932729411616,
+        0.2352152666784762,
+        0.33310847864716264,
+        0.5005963524765198
+      ],
+      "intercept": 0.4208754279679576,
+      "library_low": 0.011985153739794401,
+      "library_high": 0.19895063318581424
+    },
+    "tags": [
+      "course5",
+      "response_cnn5",
+      "response_profile5",
+      "response_aux5"
+    ]
+  },
+  "aux+profile+plain": {
+    "treated": 0.016770258320029527,
+    "fit": {
+      "coefficients": [
+        0.24344252961494528,
+        0.35704935695558865,
+        0.507582826299632
+      ],
+      "intercept": 0.4169327894092252,
+      "library_low": 0.013740683216240005,
+      "library_high": 0.19656529739637818
+    },
+    "tags": [
+      "response_cnn5",
+      "response_profile5",
+      "response_aux5"
+    ]
+  },
+  "aux+profile": {
+    "treated": 0.016784803613294624,
+    "fit": {
+      "coefficients": [
+        0.4276994109030018,
+        0.683885691784623
+      ],
+      "intercept": 0.45748367848999205,
+      "library_low": 0.0122461725903798,
+      "library_high": 0.20981529461667342
+    },
+    "tags": [
+      "response_profile5",
+      "response_aux5"
+    ]
+  },
+  "aux only": {
+    "treated": 0.01686829093479733,
+    "fit": {
+      "coefficients": [
+        1.0755465468317118
+      ],
+      "intercept": 0.24782871479108426,
+      "library_low": 0.058761503203181735,
+      "library_high": 0.2288124867397488
+    },
+    "tags": [
+      "response_aux5"
+    ]
+  },
+  "baseline_held": 0.017098368800472715,
+  "screen_training_rows": 5252,
+  "screen_validation_rows": 16696
+}

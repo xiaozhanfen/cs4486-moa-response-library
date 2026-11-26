@@ -1,0 +1,17 @@
+{
+  "response_cnn5": {
+    "kind": "response_cnn", "features": "relative", "hidden": 4096,
+    "dropout": 0.2, "batch_size": 128, "lr": 0.001,
+    "aux_warmup": false, "frequency_weight": false
+  },
+  "response_profile5": {
+    "kind": "profile_mlp", "features": "original", "hidden": 2048,
+    "dropout": 0.25, "batch_size": 256, "lr": 0.005,
+    "aux_warmup": false, "frequency_weight": false
+  },
+  "response_aux5": {
+    "kind": "response_cnn", "features": "relative", "hidden": 4096,
+    "dropout": 0.2, "batch_size": 128, "lr": 0.001,
+    "feature_run": "response_cnn5", "aux_warmup": true, "frequency_weight": true
+  }
+}

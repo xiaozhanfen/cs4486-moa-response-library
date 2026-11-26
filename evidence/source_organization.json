@@ -1,0 +1,35 @@
+{
+  "unchanged_computation": {
+    "trainer.py": [
+      "set_seed",
+      "load_raw",
+      "align_by_sig_id",
+      "predict_proba",
+      "auxiliary_warmup",
+      "profile_labels",
+      "train_one_fold"
+    ],
+    "models.py": [
+      "SimpleNN",
+      "ResponseCNN",
+      "ProfileMLP"
+    ],
+    "response_study.py": [
+      "fit_blend",
+      "apply_blend",
+      "bootstrap_drugs"
+    ],
+    "drug_library.py": [
+      "fit_library",
+      "predict_library",
+      "measurements"
+    ],
+    "response_features.py": [
+      "center_signatures",
+      "fit_response",
+      "transform_response"
+    ]
+  },
+  "standalone_imports_checked": true,
+  "scored_release_files_equal_original": true
+}

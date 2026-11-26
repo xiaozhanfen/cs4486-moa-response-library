@@ -1,0 +1,10 @@
+{
+  "title": "MoA Response Library Weights",
+  "id": "xiaozhanfen/moa-response-library-weights",
+  "licenses": [
+    {
+      "name": "other"
+    }
+  ],
+  "description": "Private course weights trained from the official lish-moa data for academic use."
+}

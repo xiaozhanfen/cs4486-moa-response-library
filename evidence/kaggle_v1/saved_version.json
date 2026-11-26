@@ -1,0 +1,36 @@
+{
+  "ref": "xiaozhanfen/moa-response-library",
+  "version": 1,
+  "private": true,
+  "internet": false,
+  "gpu": false,
+  "competition": [
+    "lish-moa"
+  ],
+  "datasets": [
+    "xiaozhanfen/moa-response-library-weights"
+  ],
+  "remote_code_sha256": "c624eac6c1343ff80c0bee1c0b08ec9cb67695d5a7dfc9b1fdf2edae68d17bed",
+  "execution_log_timestamps_seconds": [
+    {
+      "seconds": 36.079856072,
+      "message": "Inference: 3982 rows, device=cpu"
+    },
+    {
+      "seconds": 36.08223217,
+      "message": "Predicting response_cnn5"
+    },
+    {
+      "seconds": 76.102050768,
+      "message": "Predicting response_profile5"
+    },
+    {
+      "seconds": 84.685950519,
+      "message": "Predicting response_aux5"
+    },
+    {
+      "seconds": 750.895260429,
+      "message": "submission.csv written: (3982, 207)"
+    }
+  ]
+}

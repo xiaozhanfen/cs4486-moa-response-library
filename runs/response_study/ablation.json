@@ -1,0 +1,8 @@
+{
+  "five_fold_neural_only": 0.01678997055372187,
+  "uncalibrated_single_branches": {
+    "response_cnn5": 0.01701974770310347,
+    "response_profile5": 0.01708699792876901,
+    "response_aux5": 0.016983915657109935
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "train_rows": 23814,
+  "treated_rows": 21948,
+  "targets": 206,
+  "positive_fraction": 0.003725487073594958,
+  "small_drugs_max_rows": 18,
+  "cv_seed": 42,
+  "mlp_training_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "mlp_epochs": 25,
+  "folds_sha256": "0ae3180a11b2f20b89b7f8498a939a167c2af836372668dea906ad437818a08d",
+  "input_sha256": {
+    "sample_submission.csv": "b4fc4c5c63f750c93a58db523a87657357ce824e3e524413bd1e8996402ba54d",
+    "test_features.csv": "6a70e3e7d185874be49fdec78d57c4651138cef36bec34c32120271b31a971bd",
+    "train_drug.csv": "8e923782deb02bc70f15224ea239192a1c7f6b7b7a90c0e0eb858b04529d06b5",
+    "train_features.csv": "890c6c9a043e97228bc937b643e515bc3e03c889e02910acc435e10326aeb15b",
+    "train_targets_nonscored.csv": "a0d3e07d151f09c152c6dea374d6df4162879298e83863305c1e5eb460cd3806",
+    "train_targets_scored.csv": "c4f5d4739ac0db400596367c56674743214ab3eb6ceb5e8615287ab96b436811"
+  },
+  "python": "3.11.17",
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "pandas": "3.0.6",
+  "sklearn": "1.9.1",
+  "device": "NVIDIA GeForce RTX 5080",
+  "scores": {
+    "prior": {
+      "treated": 0.022443952697041396,
+      "all_rows": 0.02068530586187396
+    },
+    "baseline_mlp": {
+      "treated": 0.017917125186104423,
+      "all_rows": 0.016513188191174175
+    },
+    "projected_cnn": {
+      "treated": 0.017689056471541252,
+      "all_rows": 0.016302990318190533
+    },
+    "float_mlp": {
+      "treated": 0.017150765948813162,
+      "all_rows": 0.01580687877066235
+    },
+    "int8_mlp": {
+      "treated": 0.017151343768815497,
+      "all_rows": 0.015807411314267425
+    },
+    "float_blend": {
+      "treated": 0.017106465616788046,
+      "all_rows": 0.015766049691663137
+    },
+    "int8_blend": {
+      "treated": 0.0171068162685044,
+      "all_rows": 0.015766372867268685
+    },
+    "calibration_other_four_folds": {
+      "treated": 0.017063661293016244,
+      "all_rows": 0.015726599397796356
+    },
+    "calibration_within_fold_disjoint_drugs": {
+      "treated": 0.017071701963450845,
+      "all_rows": 0.015734010023256112
+    }
+  },
+  "per_fold": [
+    {
+      "fold": 0,
+      "rows": 4390,
+      "uncalibrated": 0.017221034434154073,
+      "other_four_folds": 0.017192806434421972,
+      "within_fold_disjoint_drugs": 0.017211317646577032
+    },
+    {
+      "fold": 1,
+      "rows": 4390,
+      "uncalibrated": 0.01704719412174372,
+      "other_four_folds": 0.016987793545131,
+      "within_fold_disjoint_drugs": 0.017014361045084875
+    },
+    {
+      "fold": 2,
+      "rows": 4389,
+      "uncalibrated": 0.01690211422916751,
+      "other_four_folds": 0.016843796879602222,
+      "within_fold_disjoint_drugs": 0.016837023652617692
+    },
+    {
+      "fold": 3,
+      "rows": 4390,
+      "uncalibrated": 0.01693619297885485,
+      "other_four_folds": 0.01688488392249772,
+      "within_fold_disjoint_drugs": 0.01688290751441438
+    },
+    {
+      "fold": 4,
+      "rows": 4389,
+      "uncalibrated": 0.017427572014525928,
+      "other_four_folds": 0.017409054277635873,
+      "within_fold_disjoint_drugs": 0.01741292422825363
+    }
+  ],
+  "quantization_delta_treated": 3.5065171635415004e-07,
+  "cnn_oof_max_abs_error": 9.834766387939453e-07,
+  "calibration_accepted": true,
+  "deployment_calibration": {
+    "slope": 1.088632439214486,
+    "intercept": 0.32251107362062753
+  },
+  "kaggle_public": null,
+  "kaggle_private": null
+}

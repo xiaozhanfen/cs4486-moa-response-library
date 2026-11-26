@@ -1,0 +1,71 @@
+{
+  "course5_official": {
+    "submission": 57937726,
+    "public": 0.01866,
+    "private": 0.01629
+  },
+  "neural_members": [
+    "response_cnn5",
+    "response_profile5",
+    "response_aux5"
+  ],
+  "deployment": {
+    "coefficients": [
+      0.2799461384589014,
+      0.3798180548456637,
+      0.4504981689153778
+    ],
+    "intercept": 0.465226650343709,
+    "library_low": 0.0,
+    "library_high": 0.2501430295119914
+  },
+  "course5_treated": 0.01706366129374375,
+  "treated": 0.0167250661566347,
+  "all_rows": 0.01541453565154196,
+  "disjoint_drugs": 0.016755529181546158,
+  "course5_disjoint_drugs": 0.017071701963450845,
+  "course5_small_drugs": 0.018696851861400136,
+  "small_drugs": 0.01840950226040843,
+  "paired_drug_bootstrap_95pct": [
+    -0.0004141559651515167,
+    -0.00026590696834926725
+  ],
+  "folds": [
+    {
+      "fold": 0,
+      "course5": 0.01719280643108562,
+      "outer": 0.016877912032325023,
+      "course5_disjoint_drugs": 0.017211317646577032,
+      "disjoint_drugs": 0.01692192112531047
+    },
+    {
+      "fold": 1,
+      "course5": 0.016987793545319346,
+      "outer": 0.01667157613114537,
+      "course5_disjoint_drugs": 0.017014361045084875,
+      "disjoint_drugs": 0.016711141865725837
+    },
+    {
+      "fold": 2,
+      "course5": 0.016843796877934848,
+      "outer": 0.016475141313012906,
+      "course5_disjoint_drugs": 0.016837023652617692,
+      "disjoint_drugs": 0.016498882010826242
+    },
+    {
+      "fold": 3,
+      "course5": 0.016884883923749094,
+      "outer": 0.01652946750150166,
+      "course5_disjoint_drugs": 0.01688290751441438,
+      "disjoint_drugs": 0.01653601563464759
+    },
+    {
+      "fold": 4,
+      "course5": 0.01740905428483833,
+      "outer": 0.017071255733373758,
+      "course5_disjoint_drugs": 0.01741292422825363,
+      "disjoint_drugs": 0.017109707487880266
+    }
+  ],
+  "passed": true
+}

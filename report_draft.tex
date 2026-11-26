@@ -52,7 +52,7 @@
 
 \begin{abstract}
 Predicting a drug's mechanisms of action from cellular measurements requires learning rare, correlated labels while accounting for repeated experiments on the same compound. We study whether a drug-response prototype library improves a neural ensemble on the Kaggle Mechanisms of Action competition. The system combines two gated CNN configurations, a dual-head MLP, and similarity-weighted votes from training-drug prototypes. Evaluation uses fixed five-fold assignments, training-fold preprocessing, and cross-fitted fusion. The final treated-row out-of-fold log loss is 0.01672507, compared with 0.02287174 for a frequency baseline. Removing the library and refitting fusion increases loss by 0.00006490, the largest increase among the four source-removal comparisons. Kaggle submission 57940904 scores Public 0.01814 and Private 0.01590. The Private score improves on the group's reference threshold, while the Public score remains slightly higher. Validation limitations include nine drug groups spanning folds and epoch selection on held-out folds.\\
-Kaggle code --- \url{https://www.kaggle.com/code/xiaozhanfen/moa-response-library}. Complete project repository --- [TODO: Add the URL after the repository is created].
+Kaggle code --- \url{https://www.kaggle.com/code/xiaozhanfen/moa-response-library}. Code repository --- \url{https://github.com/xiaozhanfen/cs4486-moa-response-library}.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -321,7 +321,7 @@ The auxiliary warm-up lasts one epoch, with weight decay $10^{-4}$, before a fre
 The recorded environment is Python 3.11.17, PyTorch 2.11.0+cu128, CUDA 12.8 and an RTX~5080 with 16~GB VRAM, using BF16 during training. [TODO: Confirm the original training operating system and version.] The dependency file pins NumPy, pandas, SciPy and scikit-learn, specifies a range for \texttt{nbformat}, and requires a separately installed PyTorch build. Retraining can vary across hardware and library builds.
 
 \subsection{Code, Data and Commands}
-The scored Kaggle notebook is available at \url{https://www.kaggle.com/code/xiaozhanfen/moa-response-library}. Its associated weights and inference modules are identified by \url{https://www.kaggle.com/datasets/xiaozhanfen/moa-response-library-weights}. Complete training code, frozen folds, analysis scripts and report figures will be linked through the project repository. [TODO: Add the repository URL after creation and verify reviewer access to the Kaggle notebook and dataset.]
+The scored Kaggle notebook is available at \url{https://www.kaggle.com/code/xiaozhanfen/moa-response-library}. Its associated weights and inference modules are identified by \url{https://www.kaggle.com/datasets/xiaozhanfen/moa-response-library-weights}. Complete training code, frozen folds, analysis scripts and report figures are available at \url{https://github.com/xiaozhanfen/cs4486-moa-response-library}. [TODO: Verify reviewer access to the private GitHub repository and both Kaggle resources.]
 
 Place the six official competition CSVs under \path{data/raw/}, retain the supplied \path{data/folds.csv}, and install the appropriate PyTorch build. The comparative study also uses the supplied predictions and statistics under \path{evidence/baseline_course5/}. From the project root, the main commands are
 \begin{verbatim}

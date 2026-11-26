@@ -1,0 +1,3 @@
+response_release/** -text
+*.moa -text
+*.npz -text

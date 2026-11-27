@@ -134,7 +134,7 @@ Quantile transforms, PCA, factor analysis, auxiliary-label selection, the annota
 
 For fusion evaluation on fold $f$, blending parameters are fitted on OOF predictions and labels from the other four folds. A separate deployment fit uses all OOF rows. Each ablated source subset receives its own fusion fit under the same protocol.
 
-Unless explicitly identified as full-row, local results report Eq.~\eqref{eq:logloss} on the 21,948 treated rows. Kaggle scores all test rows, including controls. Our full-row local score adds zeroed control predictions to the denominator. All validation losses use original binary labels, even when training applies label smoothing.
+Unless explicitly identified as full-row, local results report Eq.~\eqref{eq:logloss} on the 21,948 treated rows. Kaggle scores all test rows, including controls. The full-row local score averages loss over treated and control rows, with control probabilities set to zero before clipping. All validation losses use original binary labels, even when training applies label smoothing.
 
 \subsection{Sources of Development Bias}
 The best network epoch is selected using its held-out fold. Furthermore, the OOF predictions used to fit fusion on other folds come from base models whose training sets can include rows from fold $f$. Cross-fitting excludes fold $f$ from direct fusion fitting, while these underlying dependencies remain. We therefore interpret OOF results as development estimates and also report the official Kaggle scores. A fully nested evaluation would select epochs, fit preprocessing and train the fusion pipeline within each outer training split.
@@ -148,7 +148,7 @@ For scored label $j$, the baseline predicts the training-fold positive frequency
 \end{equation}
 for every treated validation row, with metric clipping applied at evaluation. Here $T$ contains treated training rows from four folds. This is the empirical log-loss optimum among constant probabilities for that label. Control predictions are set to zero.
 
-The baseline OOF loss is \textbf{0.02287174} on treated rows and 0.02107958 on all rows. It requires no feature fitting, optimization schedule or neural weights and is implemented in \texttt{baseline.py}. Subsequent comparisons measure whether using cellular measurements and response structure improves on these label priors under the same frozen assignments.
+The baseline OOF loss is \textbf{0.02287174} on treated rows and 0.02107958 on all rows. It requires no feature fitting, optimization schedule or neural weights and is implemented in \texttt{baseline.py}.
 
 \section{Model Improvements}
 \label{sec:improvements}
@@ -277,9 +277,9 @@ The reference thresholds used in the group's presentation are Public 0.01805 and
 \section{AI Tool Usage Statement}
 \label{sec:ai}
 
-OpenAI Codex was used for modeling discussions and technical explanations, code generation, implementation revisions and debugging, and experiment execution and checking. Assistance also covered ablation analysis, interpretation and presentation of results, and preparation of figures and slides. Codex drafted and substantially restructured parts of this report. The neural, response-library and fusion implementations are attributed to AI-assisted development. Public method sources are acknowledged in Section~\ref{sec:improvements}.
+OpenAI Codex assisted modeling discussion, technical explanation, code generation and revision, debugging, experiment execution and checks, ablation analysis, result interpretation, and figure/slide preparation. It also drafted and substantially restructured report text. The neural, library and fusion implementations are AI-assisted. Method sources are cited in Section~\ref{sec:improvements}.
 
-Member responsibilities and confirmed productive hours are detailed in Sections~\ref{sec:bio} and~\ref{sec:contribution}. Verification records cover submission shape, control handling, sample-ID alignment, release hashes and numerical agreement with the scored bundle.
+Within this process, Zibin Feng handled data analysis, the frequency baseline and reporting. Cheng Zong handled CNN/MLP module design and fusion with library predictions. Zifeng Xu handled training, submissions, ablations and result analysis.
 
 \section{Discussion \& Reflection}
 \label{sec:discussion}
@@ -315,7 +315,7 @@ Further experiments could isolate warm-up from frequency weighting, separate the
 \label{sec:reproducibility}
 
 \subsection{Training and Deployment Settings}
-CV uses split seed 42 and network seeds 0--4. Deployment uses seeds 0--7 for each of three configurations. All main tasks use Adam, weight decay $10^{-5}$, label smoothing 0.001 and a 25-epoch OneCycle schedule. Maximum learning rate is 0.01, with \texttt{pct\_start}=0.1 and \texttt{div\_factor}=1000. The schedule sets its initial learning rate from the maximum and division factor. CNN and MLP batch sizes are 128 and 256, respectively. Main dropout is 0.2 for CNNs and 0.25 for ProfileMLP.
+CV uses split seed 42 and network seeds 0--4. Deployment uses seeds 0--7 for each of three configurations. All main tasks use Adam, weight decay $10^{-5}$, label smoothing 0.001 and a 25-epoch OneCycle schedule. Maximum learning rate is 0.01, with \texttt{pct\_start}=0.1 and \texttt{div\_factor}=1000. The schedule sets its initial learning rate from the maximum and division factor. CNN and MLP batch sizes are 128 and 256, respectively. CNN projection and pattern stages use dropout 0.1, gate/head stages use 0.2, and ProfileMLP uses 0.25.
 
 The auxiliary warm-up lasts one epoch, with weight decay $10^{-4}$, before a fresh main-task optimizer is created. Deployment stopping epochs are the median CV checkpoint epochs, 18 for direct CNN, 7 for ProfileMLP and 22 for auxiliary CNN. Their learning-rate schedules retain a total length of 25 epochs. The scored bundle uses per-row INT8 weight storage and totals 113.96~MB. Quantization changed the audited fold-0 loss by approximately $1.6\times10^{-7}$. CPU inference regenerates predictions from the raw measurements.
 
@@ -342,7 +342,13 @@ python preparation/evaluate_report_combinations.py
 Remove-Item Env:MOA_RUNS_DIR
 \end{verbatim}
 \endgroup
-The recorded official public-test output under \path{evidence/kaggle_v1/submission.csv} is included for the default verification command. It is used as a comparison reference by the verifier. The script \path{preparation/generate_report_figures.py} uses Matplotlib to regenerate the four vector figures. Label support is recalculated from the official CSVs, and comparison plots use recorded summaries.
+The default verifier compares predictions with the included \path{evidence/kaggle_v1/submission.csv}. Figure regeneration uses the official CSVs and recorded summaries. Install the additional authoring dependency, Matplotlib 3.10.1, and run
+\begingroup\small
+\begin{verbatim}
+python -m pip install matplotlib==3.10.1
+python preparation/generate_report_figures.py
+\end{verbatim}
+\endgroup
 
 % --------------------------------------------------------------------------
 % SECTION 10: STUDENT BIO & REFLECTION

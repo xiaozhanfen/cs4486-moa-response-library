@@ -9,7 +9,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyArrowPatch, Rectangle
+from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,12 +37,15 @@ def label_frequency():
     ]
     intervals = ["1", "2-4", "5-9", "10-19", "20-49", "50-99", "100-249", "250+"]
     figure, axis = plt.subplots(figsize=(3.5, 2.1), layout="constrained")
-    bars = axis.bar(range(len(frequencies)), frequencies, color="#385c7e", width=0.72)
+    bars = axis.bar(range(len(frequencies)), frequencies,
+                    color=["#c58235"] * 4 + ["#263e57"] * 4, width=0.72)
     axis.bar_label(bars, padding=2, fontsize=7)
     axis.set_xticks(range(len(intervals)), intervals, rotation=35, ha="right")
-    axis.set_xlabel("Positive samples per label")
-    axis.set_ylabel("Number of labels")
-    axis.set_ylim(0, max(frequencies) * 1.18)
+    axis.set_xlabel("Positive training samples per label")
+    axis.set_ylabel("Number of scored labels")
+    axis.text(0.02, 0.97, "53 labels have fewer than 20 positives", transform=axis.transAxes,
+              va="top", color="#b7782c", fontsize=7)
+    axis.set_ylim(0, max(frequencies) * 1.35)
     axis.spines[["top", "right"]].set_visible(False)
     axis.set_axisbelow(True)
     axis.grid(axis="y", alpha=0.18)
@@ -56,18 +59,19 @@ def label_frequency():
 
 def source_removal():
     scores = json.loads((ROOT / "evidence/report_combinations.json").read_text())["scores"]
-    sources = ["response_cnn5", "response_aux5", "response_profile5", "library"]
+    sources = ["library", "response_profile5", "response_aux5", "response_cnn5"]
     full = scores["response_cnn5+response_profile5+response_aux5+library"]
     ordered_tags = ["response_cnn5", "response_profile5", "response_aux5", "library"]
     increases = [scores["+".join(tag for tag in ordered_tags if tag != source)] - full
                  for source in sources]
-    names = ["Direct CNN", "Auxiliary CNN", "ProfileMLP", "Drug library"]
+    names = ["Drug-response library", "ProfileMLP", "Auxiliary CNN", "Direct CNN"]
     figure, axis = plt.subplots(figsize=(3.5, 2.25), layout="constrained")
-    bars = axis.barh(names, [value * 1e5 for value in increases], color="#385c7e", height=0.6)
-    axis.bar_label(bars, labels=[f"{value:.8f}" for value in increases], padding=3, fontsize=7)
+    bars = axis.barh(names, [value * 1e5 for value in increases],
+                     color=["#137e86"] + ["#263e57"] * 3, height=0.6)
+    axis.bar_label(bars, labels=[f"{value * 1e5:.3f}" for value in increases], padding=3, fontsize=7)
     axis.invert_yaxis()
-    axis.set_xlim(0, max(increases) * 1e5 * 1.43)
-    axis.set_xlabel(r"Increase in OOF log loss ($\times 10^{-5}$)")
+    axis.set_xlim(0, max(increases) * 1e5 * 1.25)
+    axis.set_xlabel(r"Increase in log loss (units of $10^{-5}$)")
     axis.spines[["top", "right"]].set_visible(False)
     axis.set_axisbelow(True)
     axis.grid(axis="x", alpha=0.18)
@@ -81,18 +85,22 @@ def fold_comparison():
     record = json.loads((ROOT / "runs/response_study/selected_cv.json").read_text())
     folds = record["folds"]
     figure, axis = plt.subplots(figsize=(3.5, 2.25), layout="constrained")
-    axis.plot([row["fold"] for row in folds], [row["course5"] for row in folds],
-              marker="o", markersize=4, linestyle="--", color="#7d8288", label="Earlier Course5 system")
-    axis.plot([row["fold"] for row in folds], [row["outer"] for row in folds],
-              marker="o", markersize=4, color="#385c7e", label="Final system")
-    axis.set_xticks(range(5))
-    axis.set_xlabel("Held-out fold")
-    axis.set_ylabel("Treated-row log loss")
-    axis.ticklabel_format(axis="y", style="plain", useOffset=False)
-    axis.set_ylim(0.01635, 0.01765)
-    axis.legend(frameon=False, fontsize=7, loc="upper center")
+    for row in folds:
+        axis.plot([row["outer"], row["course5"]], [row["fold"], row["fold"]],
+                  color="#bbc6d0", linewidth=1.5, zorder=1)
+    axis.scatter([row["outer"] for row in folds], [row["fold"] for row in folds],
+                 color="#137e86", s=20, label="Final system", zorder=2)
+    axis.scatter([row["course5"] for row in folds], [row["fold"] for row in folds],
+                 color="#263e57", marker="s", s=20, label="Earlier Course5", zorder=2)
+    axis.set_yticks(range(5), [f"Fold {i + 1}" for i in range(5)])
+    axis.set_xlabel("Treated-row OOF log loss (lower is better)")
+    axis.ticklabel_format(axis="x", style="plain", useOffset=False)
+    axis.set_xlim(0.01635, 0.0175)
+    axis.set_xticks([0.0164, 0.0167, 0.0170, 0.0173])
+    axis.set_ylim(4.4, -0.8)
+    axis.legend(frameon=False, fontsize=6.5, loc="upper center", ncol=2)
     axis.spines[["top", "right"]].set_visible(False)
-    axis.grid(alpha=0.18)
+    axis.grid(axis="x", alpha=0.18)
     output = ROOT / "figures/fold_comparison.pdf"
     figure.savefig(output)
     plt.close(figure)
@@ -118,9 +126,12 @@ def model_overview():
         "output": (0.855, 0.35, 0.14, 0.29, "Similarity mix\nControl mask\n\n206 output\nprobabilities"),
     }
     for key, (x, y, width, height, label) in boxes.items():
-        fill = "#eaf0f5" if key in ("direct", "aux", "mlp", "library") else "white"
-        axis.add_patch(Rectangle((x, y), width, height, facecolor=fill,
-                                 edgecolor="#385c7e", linewidth=0.8))
+        library_node = key in ("library_features", "library", "output")
+        edge = "#137e86" if library_node else "#263e57"
+        fill = "#edf6f6" if library_node else "#f1f4f7"
+        axis.add_patch(FancyBboxPatch((x, y), width, height,
+                                      boxstyle="round,pad=0.003,rounding_size=0.012",
+                                      facecolor=fill, edgecolor=edge, linewidth=0.8))
         axis.text(x + width / 2, y + height / 2, label, ha="center", va="center", fontsize=7.5)
 
     def arrow(start, end):

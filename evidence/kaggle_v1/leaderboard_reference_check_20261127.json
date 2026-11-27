@@ -1,0 +1,90 @@
+{
+  "checked_utc": "2026-11-27T15:04:29.146530+00:00",
+  "competition": "lish-moa",
+  "source": "Kaggle official SDK CompetitionApiClient.get_leaderboard",
+  "leaderboard_url": "https://www.kaggle.com/competitions/lish-moa/leaderboard",
+  "boards": {
+    "private": {
+      "override_public": false,
+      "entries": [
+        {
+          "position": 1,
+          "team": "Hungry for gold🥇🥇",
+          "score": "0.01599",
+          "submission_date": "2020-11-30 18:39:23.226000"
+        },
+        {
+          "position": 2,
+          "team": "tmp",
+          "score": "0.01599",
+          "submission_date": "2020-11-30 04:48:23.926000"
+        },
+        {
+          "position": 3,
+          "team": "Jixian Zhang & Shiji Qiao",
+          "score": "0.01600",
+          "submission_date": "2020-11-30 16:10:41.473000"
+        },
+        {
+          "position": 4,
+          "team": "Kanna Hashimoto with Friends",
+          "score": "0.01600",
+          "submission_date": "2020-11-30 19:29:21.956000"
+        },
+        {
+          "position": 5,
+          "team": "YuyaAnna",
+          "score": "0.01602",
+          "submission_date": "2020-11-30 15:49:19.403000"
+        },
+        {
+          "position": 6,
+          "team": "MoooooooA",
+          "score": "0.01602",
+          "submission_date": "2020-11-30 12:35:50.316000"
+        }
+      ]
+    },
+    "public": {
+      "override_public": true,
+      "entries": [
+        {
+          "position": 1,
+          "team": "hoshi+Shun_PI+riantkb+colun",
+          "score": "0.01794",
+          "submission_date": "2020-11-30 20:55:31.340000"
+        },
+        {
+          "position": 2,
+          "team": "Cat Shaking Down...",
+          "score": "0.01799",
+          "submission_date": "2020-11-30 20:24:52.533000"
+        },
+        {
+          "position": 3,
+          "team": "Phi",
+          "score": "0.01803",
+          "submission_date": "2020-11-30 21:59:50.406000"
+        },
+        {
+          "position": 4,
+          "team": "tmp",
+          "score": "0.01804",
+          "submission_date": "2020-11-30 04:48:23.926000"
+        },
+        {
+          "position": 5,
+          "team": "cmanning",
+          "score": "0.01805",
+          "submission_date": "2020-11-30 02:41:45.556000"
+        },
+        {
+          "position": 6,
+          "team": "Jixian Zhang & Shiji Qiao",
+          "score": "0.01808",
+          "submission_date": "2020-11-30 16:10:41.473000"
+        }
+      ]
+    }
+  }
+}

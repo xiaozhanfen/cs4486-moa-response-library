@@ -1,0 +1,51 @@
+{
+  "checked_utc": "2026-11-27T15:06:06.325237+00:00",
+  "notebook": {
+    "url": "https://www.kaggle.com/code/xiaozhanfen/moa-response-library",
+    "is_private": false,
+    "kernel_id": 142469838,
+    "public_quick_save_version": 2,
+    "execution": "QUICK_SAVE, no execution",
+    "code_sha256": "c624eac6c1343ff80c0bee1c0b08ec9cb67695d5a7dfc9b1fdf2edae68d17bed",
+    "code_identical_to_scored_v1": true,
+    "anonymous_latest_source_http": 200,
+    "anonymous_v1_source_http": 200,
+    "v1_label": "v1"
+  },
+  "dataset": {
+    "url": "https://www.kaggle.com/datasets/xiaozhanfen/moa-response-library-weights",
+    "dataset_id": 13056224,
+    "is_private": false,
+    "change": "Metadata visibility and removal of the obsolete Private description prefix only",
+    "license_retained": "other",
+    "anonymous_metadata_http": 200,
+    "anonymous_file_list_http": 200,
+    "listed_files": 14,
+    "file_names": [
+      "drug_library.py",
+      "infer_engine.py",
+      "moa_manifest.json",
+      "models.py",
+      "response_features.py",
+      "weights_features.moa",
+      "weights_seed0.moa",
+      "weights_seed1.moa",
+      "weights_seed2.moa",
+      "weights_seed3.moa",
+      "weights_seed4.moa",
+      "weights_seed5.moa",
+      "weights_seed6.moa",
+      "weights_seed7.moa"
+    ],
+    "description": "Course-project weights trained from the official lish-moa data for academic use."
+  },
+  "scored_submission": {
+    "ref": 57940904,
+    "version": 1,
+    "status": "SubmissionStatus.COMPLETE",
+    "public": "0.01814",
+    "private": "0.01590"
+  },
+  "frozen_release_hashes_verified": true,
+  "anonymous_web_page_note": "The www.kaggle.com HTML front end returned empty HTTP404 in this environment; public source and dataset metadata/file-list access were independently verified through unauthenticated official api.kaggle.com requests."
+}

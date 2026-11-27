@@ -11,6 +11,13 @@
 
 **先读 [架构讲解 ARCHITECTURE_CN.md](ARCHITECTURE_CN.md)**。它按任务、输入、CNN、MLP、药物库、概率融合、训练验证和运行顺序讲解，附流程图、尺寸、小例子和答辩练习。
 
+## 最终报告与公开资源
+
+- [最终报告 PDF](output/pdf/Group11_Project2_Report.pdf)，提交文件名为 `Group11_Project2_Report.pdf`。组长在最后的签名和日期栏填写后，由一名成员上传。
+- [报告 TeX 源稿](report_draft.tex) 与 `figures/`、绘图脚本同步提供。三位成员已确认总计 90 小时的贡献工时。
+- [Kaggle Notebook](https://www.kaggle.com/code/xiaozhanfen/moa-response-library) 和 [权重数据集](https://www.kaggle.com/datasets/xiaozhanfen/moa-response-library-weights) 已公开。正式得分来自 Version 1；Version 2 是代码相同的公开 quick-save，未执行新实验。
+- 官方 Public / Private 榜单参考值及查询参数见 `evidence/kaggle_v1/leaderboard_reference_check_20261127.json`。公开设置与匿名访问核验见 `evidence/kaggle_v1/public_access_20261127.json`。
+
 ## 先跑一次预测
 
 本机已经配置好 `cs4486` 环境，无需重新安装。进入本目录后执行：

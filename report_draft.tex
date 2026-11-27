@@ -19,7 +19,11 @@
 \usepackage{graphicx}
 \usepackage{cite}
 \usepackage{tabularx}
-\usepackage{booktabs} % For better looking tables
+\usepackage{booktabs}
+\usepackage{capt-of}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={CS4486 Mini Project: Mechanisms of Action Prediction},
+    pdfauthor={Group 11: Zifeng Xu, Cheng Zong, Zibin Feng}}
 
 \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
 
@@ -28,9 +32,8 @@
 
 % =========================================================================
 % HOW TO USE THIS DRAFT
-% - Text marked [TODO: ...] must be filled in before submission.
-% - LaTeX comments starting with "% TODO(user):" carry notes for the team
-%   and are NOT visible in the compiled PDF.
+% The team leader signs the exported PDF after final review.
+% Source and figure assets are published with the project code.
 % =========================================================================
 
 \begin{document}
@@ -42,9 +45,9 @@
 
 % Confirm the registered group and fill actual Student IDs.
 \author{\textbf{Group 11}\\[0.6em]
-    Zifeng Xu (Group Leader) + 72400440 \\[0pt]
-    Cheng Zong + 72400174 \\[0pt]
-    Zibin Feng + 72400739
+    Zifeng Xu (Group Leader), Student ID 72400440 \\[0pt]
+    Cheng Zong, Student ID 72400174 \\[0pt]
+    Zibin Feng, Student ID 72400739
 }
 \markboth{CS4486 AI Course - Mini Project Final Report}%
 {Group 11: Mechanisms of Action Prediction}
@@ -52,7 +55,7 @@
 
 \begin{abstract}
 Predicting a drug's mechanisms of action from cellular measurements requires learning rare, correlated labels while accounting for repeated experiments on the same compound. We study whether a drug-response prototype library improves a neural ensemble on the Kaggle Mechanisms of Action competition. The system combines two gated CNN configurations, a dual-head MLP, and similarity-weighted votes from training-drug prototypes. Evaluation uses fixed five-fold assignments, training-fold preprocessing, and cross-fitted fusion. The final treated-row out-of-fold log loss is 0.01672507, compared with 0.02287174 for a frequency baseline. Removing the library and refitting fusion increases loss by 0.00006490, the largest increase among the four source-removal comparisons. Kaggle submission 57940904 scores Public 0.01814 and Private 0.01590. The Private score improves on the group's reference threshold, while the Public score remains slightly higher. Validation limitations include nine drug groups spanning folds and epoch selection on held-out folds.\\
-Kaggle code --- \url{https://www.kaggle.com/code/xiaozhanfen/moa-response-library}. Code repository --- \url{https://github.com/xiaozhanfen/cs4486-moa-response-library}.
+Code repository --- \url{https://github.com/xiaozhanfen/cs4486-moa-response-library}.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -269,16 +272,14 @@ We also compare with an earlier internal system, Course5, whose treated-row OOF 
 \subsection{Kaggle Scores and the Course Target}
 The final Kaggle scores are Public 0.01814 and Private 0.01590. The earlier Course5 submission, 57937726, scored Public 0.01866 and Private 0.01629. Both official scores improve in the same direction as local CV, while Public and Private evaluate different test subsets.
 
-The reference thresholds used in the group's presentation are Public 0.01805 and Private 0.01602. The final Private score is lower by 0.00012, while the Public score is higher by 0.00009. The course's Case~A criterion refers to leaderboard placement. [TODO: Verify the original source, date and ranking associated with these reference scores, and the applicable interpretation of the Top-5 requirement.]
+The reference thresholds used in the group's presentation are Public 0.01805 and Private 0.01602. On 27 November 2026, the official Kaggle leaderboard API was checked separately for the public and private boards. Their fifth entries were cmanning (Public 0.01805) and YuyaAnna (Private 0.01602). The final Private score is lower by 0.00012 and the Public score is higher by 0.00009. This establishes the comparison with the historical fifth-place scores. The course's Case~A criterion concerns leaderboard placement, and the recorded late submission supplies scores without an official top-five rank. The source records and query parameters are provided in the repository's leaderboard evidence~\cite{ref_leaderboard}.
 
 \section{AI Tool Usage Statement}
 \label{sec:ai}
 
-OpenAI Codex participated in modeling discussion, technical explanation, code development and debugging, experimental analysis, and preparation and revision of project materials, including this report and its visualizations. The project records acknowledge AI participation in model development and implementation. Public method sources are cited in Section~\ref{sec:improvements}.
+OpenAI Codex was used for modeling discussions and technical explanations, code generation, implementation revisions and debugging, and experiment execution and checking. Assistance also covered ablation analysis, interpretation and presentation of results, and preparation of figures and slides. Codex drafted and substantially restructured parts of this report. The neural, response-library and fusion implementations are attributed to AI-assisted development. Public method sources are acknowledged in Section~\ref{sec:improvements}.
 
-The group reports the following division of responsibility. Zibin Feng handled data analysis, the frequency baseline and report writing. Cheng Zong handled the main model modules and fusion design. Zifeng Xu handled training runs, experiments, Kaggle submission, ablations and result analysis. These responsibilities describe the work areas within the AI-assisted project.
-
-[TODO: Each member should verify the disclosed AI tools and uses, identify the parts independently completed, and record how code and experimental results were checked. Add any additional AI tools actually used.]
+Member responsibilities and confirmed productive hours are detailed in Sections~\ref{sec:bio} and~\ref{sec:contribution}. Verification records cover submission shape, control handling, sample-ID alignment, release hashes and numerical agreement with the scored bundle.
 
 \section{Discussion \& Reflection}
 \label{sec:discussion}
@@ -295,7 +296,7 @@ The improvement over Course5 is uneven across labels. Of 206 labels, 150 improve
 \caption{Selected missed positives from final OOF predictions. Both ground-truth labels equal one. Full sample identifiers are recorded with the experiment artifacts.}
 \label{tab:failures}
 \centering
-\begin{tabularx}{\columnwidth}{Xr}
+\begin{tabularx}{\columnwidth}{>{\raggedright\arraybackslash}Xr}
 \toprule
 \textbf{Positive target and sample} & \textbf{Predicted probability}\\
 \midrule
@@ -321,7 +322,7 @@ The auxiliary warm-up lasts one epoch, with weight decay $10^{-4}$, before a fre
 The recorded environment is Python 3.11.17, PyTorch 2.11.0+cu128, CUDA 12.8 and an RTX~5080 with 16~GB VRAM, using BF16 during training. The project machine currently runs Windows 11 Pro, version 25H2 (OS build 26200.9974), as checked on 26 November 2026. The dependency file pins NumPy, pandas, SciPy and scikit-learn, specifies a range for \texttt{nbformat}, and requires a separately installed PyTorch build. Retraining can vary across hardware and library builds.
 
 \subsection{Code, Data and Commands}
-The scored Kaggle notebook is available at \url{https://www.kaggle.com/code/xiaozhanfen/moa-response-library}. Its associated weights and inference modules are identified by \url{https://www.kaggle.com/datasets/xiaozhanfen/moa-response-library-weights}. Complete training code, frozen folds, analysis scripts and report figures are available at \url{https://github.com/xiaozhanfen/cs4486-moa-response-library}. The GitHub repository is public. [TODO: Verify reviewer access to both Kaggle resources.]
+The scored Kaggle notebook is available at \url{https://www.kaggle.com/code/xiaozhanfen/moa-response-library}. Its associated weights and inference modules are identified by \url{https://www.kaggle.com/datasets/xiaozhanfen/moa-response-library-weights}. Complete training code, frozen folds, analysis scripts and report figures are available at \url{https://github.com/xiaozhanfen/cs4486-moa-response-library}. The repository, Kaggle notebook and weight dataset are public.
 
 Place the six official competition CSVs under \path{data/raw/}, retain the supplied \path{data/folds.csv}, and install the appropriate PyTorch build. The comparative study also uses the supplied predictions and statistics under \path{evidence/baseline_course5/}. From the project root, the main commands are
 \begin{verbatim}
@@ -333,7 +334,15 @@ python reproduce.py all
 \end{verbatim}
 Retraining writes its CV, study, audit, full-data and packaging artifacts under \path{reproduction/}. The scored Version~1 bundle is stored under \path{response_release/}. Inference alone requires the raw test features, submission template and saved weights.
 
-The script \path{preparation/evaluate_report_combinations.py} reconstructs the 15-source-combination results from aligned base OOF predictions and saves \path{evidence/report_combinations.json}. It refits each neural subset's fusion on four folds and applies it to the fifth. The library-only result uses saved similarity votes. This analysis requires the saved OOF arrays or their regeneration by the CV stage. The script \path{preparation/generate_report_figures.py}, using Matplotlib, regenerates all four figures from the official data and recorded results.
+The script \path{preparation/evaluate_report_combinations.py} reconstructs all 15 combinations from aligned base OOF predictions, refitting fusion on four folds before applying it to the fifth. The library-only row uses original similarity votes. Results are recorded in \path{evidence/report_combinations.json}. Full base OOF arrays are required and can be regenerated with the CV stage. After \texttt{reproduce.py all}, point the analysis at its new artifacts. In PowerShell the commands are
+\begingroup\small
+\begin{verbatim}
+$env:MOA_RUNS_DIR = "reproduction/runs"
+python preparation/evaluate_report_combinations.py
+Remove-Item Env:MOA_RUNS_DIR
+\end{verbatim}
+\endgroup
+The recorded official public-test output under \path{evidence/kaggle_v1/submission.csv} is included for the default verification command. It is used as a comparison reference by the verifier. The script \path{preparation/generate_report_figures.py} uses Matplotlib to regenerate the four vector figures. Label support is recalculated from the official CSVs, and comparison plots use recorded summaries.
 
 % --------------------------------------------------------------------------
 % SECTION 10: STUDENT BIO & REFLECTION
@@ -341,66 +350,59 @@ The script \path{preparation/evaluate_report_combinations.py} reconstructs the 1
 \section{Student Bio and Self-Reflection}
 \label{sec:bio}
 
-% English spellings are transliterations. Confirm preferred spellings before submission.
-% Speaker mapping from the presentation and the group leader's account:
-% A = Feng Zibin, B = Zong Cheng, C = Xu Zifeng.
-[TODO: Each member should review the drafted reflection below and amend it to match their own experience and preferred English name.]
-
 \subsection{Zibin Feng, Student ID 72400739}
 \textbf{Biography.} Zibin Feng is a CS4486 project member whose technical focus in this project was data analysis, baseline construction and technical reporting.
 
-\textbf{Self-reflection.} My main takeaway is that a baseline needs to reflect the data distribution and the evaluation protocol. With sparse labels, marginal frequencies already produce a low log loss. The learned system's improvement becomes meaningful when both methods use the same rows and folds. Preparing the report also highlighted the need to explain whether a result measures a standalone model, calibrated fusion or a component-removal comparison.
+\textbf{Self-reflection.} A meaningful baseline must reflect the label distribution and validation protocol. Marginal frequencies already produce a low log loss with sparse labels, so comparisons must use the same rows and folds. Writing the report taught me to distinguish standalone scores, calibrated fusion and source-removal results.
 
-\textbf{Contribution.} I handled dataset analysis, the frequency baseline and report writing, corresponding to the task, data, validation and baseline material presented by Speaker~A.
+\textbf{Contribution.} I handled data analysis, the frequency baseline and report writing, covering label support, control handling and training-fold label frequencies under the fixed five-fold protocol. I presented the task, data, validation and baseline material as Speaker~A.
 
 \subsection{Cheng Zong, Student ID 72400174}
 \textbf{Biography.} Cheng Zong is a CS4486 project member whose technical focus was the main model modules and prediction fusion.
 
-\textbf{Self-reflection.} The main lesson from the model and fusion work is that the strongest standalone branch need not provide the largest contribution to an ensemble. ProfileMLP has a weaker individual score but its removal increases the final loss more than removing either CNN. This motivates evaluating each source within the complete system. I would next isolate the pattern head and feature pipeline, and test warm-up and positive weighting separately, to obtain more specific evidence about the design choices.
+\textbf{Self-reflection.} Model and fusion work showed me that standalone strength differs from ensemble contribution. ProfileMLP has a weaker individual score, yet removing it hurts more than removing either CNN. I would next separate the pattern head from its feature pipeline, and test warm-up and positive weighting individually.
 
-\textbf{Contribution.} I handled the design of the main model modules and fusion, corresponding to the feature pipelines, neural configurations and response-library fusion explained by Speaker~B.
+\textbf{Contribution.} I handled model modules and fusion, covering the CNN and ProfileMLP representations, auxiliary-label training, library predictions and logit-space blending. I explained these components as Speaker~B. Their AI-assisted development is disclosed in Section~\ref{sec:ai}.
 
 \subsection{Zifeng Xu, Student ID 72400440}
 \textbf{Biography.} Zifeng Xu is the group leader and focused on training, experiment execution, submission and result analysis for this project.
 
-\textbf{Self-reflection.} Running the experiments and submission emphasized the importance of keeping folds, seeds, artifacts and score definitions traceable. The source-removal study quantified how much the library and each neural branch contributed after fusion was refitted. The failure analysis and nine drugs spanning folds also showed why a better development score needs careful interpretation. A future evaluation should choose epochs and fusion configurations within a fully held-out outer training split.
+\textbf{Self-reflection.} Running experiments taught me to keep folds, seeds, artifacts and score definitions traceable. Source-removal comparisons quantified conditional contributions, while missed positives and nine drugs spanning folds exposed limitations. I would next select epochs and fusion configurations entirely within an outer training split.
 
-\textbf{Contribution.} I handled training runs, experiments, Kaggle submission, ablations and result analysis. This corresponds to the results, failure cases and reproducibility material presented by Speaker~C.
+\textbf{Contribution.} I handled training, experiment execution, Kaggle submission, ablations and result analysis. This included fixed-fold and multi-seed experiments, source-removal comparisons, failure cases and leaderboard results. I presented the results, limitations and reproducibility material as Speaker~C.
 
 % --------------------------------------------------------------------------
 % SECTION 11: RELATIVE CONTRIBUTION
 % --------------------------------------------------------------------------
+\clearpage
+\twocolumn[{
 \section{Relative Contribution}
 \label{sec:contribution}
 
-Table~\ref{tab:contributions} gives a provisional estimate based on the declared division of work. [TODO: Each member must confirm or correct these estimates against actual productive hours before submission. Exclude unattended model-running time and update the totals after any correction.]
+Table~\ref{tab:contributions} records the actual productive hours confirmed by all three members. The total is 90 person-hours. Zibin Feng's largest share is reporting and presentation preparation, Cheng Zong's is model improvement, and Zifeng Xu's is experiments and tuning. The figures exclude unattended model-running time. The contribution percentages use each member's hours divided by the team total.
 
-% TODO(user): Confirm the proposed hours with every member and recalculate totals.
-
-\begin{table*}[!t]
-\caption{Provisional Contribution Breakdown in Hours, Pending Member Confirmation}
+\begin{center}
+\captionof{table}{Confirmed Team Contribution Breakdown in Productive Hours}
 \label{tab:contributions}
-\centering
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{0.9\textwidth}{|l|X|X|X|X|X|c|}
-\hline
-\textbf{Team Member} & \textbf{Data \& Validation} & \textbf{Baseline} & \textbf{Model Changes} & \textbf{Experiments \& Tuning} & \textbf{Report \& Slides} & \textbf{Total} \\
-\hline
-Zibin Feng & 8 & 6 & 0 & 2 & 12 & \textbf{28} \\
-\hline
-Cheng Zong & 3 & 1 & 18 & 6 & 2 & \textbf{30} \\
-\hline
-Zifeng Xu & 4 & 0 & 4 & 20 & 4 & \textbf{32} \\
-\hline
-\textbf{Team Total} & \textbf{15} & \textbf{7} & \textbf{22} & \textbf{28} & \textbf{18} & \textbf{90} \\
-\hline
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.98\textwidth}{lXXXXXrr}
+\toprule
+\textbf{Team member} & \textbf{Data \& validation} & \textbf{Baseline} & \textbf{Model improvement} & \textbf{Experiments \& tuning} & \textbf{Report \& presentation} & \textbf{Total} & \textbf{Share}\\
+\midrule
+Zibin Feng & 8 & 6 & 0 & 2 & 12 & \textbf{28} & 31.1\%\\
+Cheng Zong & 3 & 1 & 18 & 6 & 2 & \textbf{30} & 33.3\%\\
+Zifeng Xu & 4 & 0 & 4 & 20 & 4 & \textbf{32} & 35.6\%\\
+\midrule
+\textbf{Team total} & \textbf{15} & \textbf{7} & \textbf{22} & \textbf{28} & \textbf{18} & \textbf{90} & \textbf{100\%}\\
+\bottomrule
 \end{tabularx}
-\end{table*}
+\end{center}
 
 \section*{Team Leader Attestation}
-``I, Zifeng Xu, confirm that the contributions listed above accurately reflect the work completed by each team member.'' \\
-\vspace{0.5cm}
-Signed: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+``I, Zifeng Xu, confirm that the contributions listed above accurately reflect the work completed by each team member.''\\[1em]
+Signature: \rule{0.39\textwidth}{0.4pt}\hfill Date: \rule{0.21\textwidth}{0.4pt}
+\vspace{2em}
+}]
 
 \appendices
 \section{Prediction-Source Combinations}
@@ -435,10 +437,12 @@ The CNN input projection produces $B\times256\times16$ features. A kernel-5 conv
 
 For Eq.~\eqref{eq:blend}, the all-OOF deployment coefficients, in direct CNN / ProfileMLP / auxiliary CNN order, are $(0.279946,0.379818,0.450498)$, with intercept 0.465227. Equation~\eqref{eq:libmix} uses library endpoints $(0,0.250143)$. These parameters are jointly fitted for deployment. Each validation fold and source subset fits its own parameters.
 
+The competition scores in this report belong to notebook Version~1 and submission 57940904. A code-identical Version~2 quick-save made the notebook public on 27 November 2026. The public-access receipt records the unchanged code hash, the original scored submission, anonymous source and dataset access checks, and the preserved release hashes.
+
 % --------------------------------------------------------------------------
 % REFERENCES
 % --------------------------------------------------------------------------
-\begin{thebibliography}{3}
+\begin{thebibliography}{4}
 \bibliographystyle{IEEEtran}
 
 \bibitem{ref_kaggle}
@@ -449,6 +453,9 @@ B.~Guo, ``Kaggle-MoA 2nd Place Solution,'' GitHub repository. [Online]. Availabl
 
 \bibitem{ref_moa1st}
 ``1st place winning solution -- hungry for gold,'' Kaggle competition write-up for Mechanisms of Action (MoA) Prediction. [Online]. Available: \url{https://www.kaggle.com/competitions/lish-moa/writeups/hungry-for-gold-1st-place-winning-solution-hungry-}
+
+\bibitem{ref_leaderboard}
+Kaggle, ``Mechanisms of Action (MoA) Prediction leaderboard,'' public and private board API responses, checked 27 Nov. 2026. [Online]. Available: \url{https://www.kaggle.com/competitions/lish-moa/leaderboard}. Recorded responses are included in \path{evidence/kaggle_v1/leaderboard_reference_check_20261127.json}.
 
 \end{thebibliography}
 
